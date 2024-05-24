@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @AllArgsConstructor()
-@CrossOrigin
 @RestController
 @RequestMapping("/usuarios")
 public class UserController {
