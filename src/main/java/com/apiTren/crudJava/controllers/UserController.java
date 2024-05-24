@@ -2,12 +2,16 @@ package com.apiTren.crudJava.controllers;
 
 import com.apiTren.crudJava.models.UsersModel;
 import com.apiTren.crudJava.services.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
+@AllArgsConstructor()
+@CrossOrigin
 @RestController
 @RequestMapping("/usuarios")
 public class UserController {
@@ -15,8 +19,8 @@ public class UserController {
     // esto cuando ya se han creado los servicios
 
     //injectamos dependencias
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
 
     // 1ra ruta, peticion get
     @GetMapping
@@ -25,6 +29,7 @@ public class UserController {
     }
 
     // el requestbody es para hacer referencia de que se va a pasar algo a trabes de este ejemplo por el BODY
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public UsersModel saveUser(@RequestBody UsersModel user){
         return this.userService.saveUser(user);
@@ -42,7 +47,7 @@ public class UserController {
         return this.userService.updateById(request, id);
     }
 
-
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "/{id}")
     public String deleteUserById(@PathVariable("id") Long id) {
         boolean ok = this.userService.deleteUser(id);

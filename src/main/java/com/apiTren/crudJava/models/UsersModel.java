@@ -1,6 +1,8 @@
 package com.apiTren.crudJava.models;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,11 +25,11 @@ public class UsersModel {
 
     private int phone;
 
-    private String nacDate;
+    private Date nacDate;
 
     private int password;
 
-    private String createdDate;
+    private LocalDateTime createdDate;
 
 
 

@@ -2,20 +2,22 @@ package com.apiTren.crudJava.services;
 
 import com.apiTren.crudJava.models.UsersModel;
 import com.apiTren.crudJava.repositories.IdUserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 
+@AllArgsConstructor()
 @Service
 // en los servicios creamos los metodos a utilizar en el controlador
 //se llama al repo para poder conectar con la base de datos
 public class UserService {
 
     //injeccion de dependencias
-    @Autowired
-    IdUserRepository userRepository;
+    private final IdUserRepository userRepository;
 
     //metodo que viene jparepository el cual dentro de el trae metodos como findall
     // para buscar todos los datos y mostrarlos a traves del array list
@@ -25,6 +27,7 @@ public class UserService {
 
     //guardamos los ususarios
     public UsersModel saveUser(UsersModel user) {
+        user.setCreatedDate(LocalDateTime.now());
         return userRepository.save(user);
     }
 
@@ -43,7 +46,6 @@ public class UserService {
         user.setPhone(request.getPhone());
         user.setNacDate(request.getNacDate());
         user.setPassword(request.getPassword());
-        user.setCreatedDate(request.getCreatedDate());
 
         //actualizamos y guardamos cambios
         userRepository.save(user);
